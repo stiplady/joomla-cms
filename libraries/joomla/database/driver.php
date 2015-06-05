@@ -1523,9 +1523,16 @@ abstract class JDatabaseDriver extends JDatabase implements JDatabaseInterface
 
 			if (is_null($as))
 			{
-				foreach ($name as $str)
+				foreach ($name as $str2 => $str)
 				{
-					$fin[] = $this->quoteName($str);
+					if ( !is_numeric($str) )
+					{
+						$fin[] = $this->quoteName($str2, $str);
+					}
+					else
+					{
+						$fin[] = $this->quoteName($str);
+					}
 				}
 			}
 			elseif (is_array($name) && (count($name) == count($as)))
